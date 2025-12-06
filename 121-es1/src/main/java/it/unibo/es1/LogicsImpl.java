@@ -1,13 +1,18 @@
 package it.unibo.es1;
 
+import java.util.ArrayList;
+//import java.util.Collections;
 import java.util.List;
+//import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 /**
  * Implementation of the Logics interface.
  */
 public class LogicsImpl implements Logics {
 
-    private static final String ERROR_MESSAGE = "Unimplemented method";
+    private static final int MAX_VALUE = 4;
+    private final List<Integer> values;
 
     /**
      * Constructor.
@@ -15,7 +20,10 @@ public class LogicsImpl implements Logics {
      * @param size the size of the logics
      */
     public LogicsImpl(final int size) {
-        throw new UnsupportedOperationException(ERROR_MESSAGE);
+        this.values = new ArrayList<>(size);
+        for (int i = 0; i < size; i++) {
+            values.add(0);
+        }
     }
 
     /**
@@ -23,7 +31,7 @@ public class LogicsImpl implements Logics {
      */
     @Override
     public int size() {
-        throw new UnsupportedOperationException(ERROR_MESSAGE);
+        return this.values.size();
     }
 
     /**
@@ -31,7 +39,7 @@ public class LogicsImpl implements Logics {
      */
     @Override
     public List<Integer> values() {
-        throw new UnsupportedOperationException(ERROR_MESSAGE);
+        return List.copyOf(this.values);
     }
 
     /**
@@ -39,7 +47,9 @@ public class LogicsImpl implements Logics {
      */
     @Override
     public List<Boolean> enabledStates() {
-        throw new UnsupportedOperationException(ERROR_MESSAGE);
+        return values.stream()
+                .map(t -> t < MAX_VALUE)
+                .toList();
     }
 
     /**
@@ -47,7 +57,8 @@ public class LogicsImpl implements Logics {
      */
     @Override
     public int hit(final int elem) {
-        throw new UnsupportedOperationException(ERROR_MESSAGE);
+        values.set(elem, values.get(elem) + 1);
+        return values.get(elem);
     }
 
     /**
@@ -55,7 +66,9 @@ public class LogicsImpl implements Logics {
      */
     @Override
     public String result() {
-        throw new UnsupportedOperationException(ERROR_MESSAGE);
+        return values.stream()
+                .map(t -> t.toString()) // NOPMD: No, using Integer::toString generates another error
+                .collect(Collectors.joining("|", "<<", ">>"));
     }
 
     /**
@@ -63,6 +76,7 @@ public class LogicsImpl implements Logics {
      */
     @Override
     public boolean toQuit() {
-        throw new UnsupportedOperationException(ERROR_MESSAGE);
+        return values.stream()
+                .allMatch(t -> t == MAX_VALUE);
     }
 }

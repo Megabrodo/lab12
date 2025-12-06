@@ -48,5 +48,4 @@ public final class GUI extends JFrame {
         pack();
         this.setVisible(true);
     }
-
 }
