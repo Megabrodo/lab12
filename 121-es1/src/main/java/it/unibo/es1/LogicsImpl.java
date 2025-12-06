@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
  */
 public class LogicsImpl implements Logics {
 
-    private static final int MAX_VALUE = 4;
+    private final int maxValue;
     private final List<Integer> values;
 
     /**
@@ -20,6 +20,7 @@ public class LogicsImpl implements Logics {
      * @param size the size of the logics
      */
     public LogicsImpl(final int size) {
+        maxValue = size;
         this.values = new ArrayList<>(size);
         for (int i = 0; i < size; i++) {
             values.add(0);
@@ -48,7 +49,7 @@ public class LogicsImpl implements Logics {
     @Override
     public List<Boolean> enabledStates() {
         return values.stream()
-                .map(t -> t < MAX_VALUE)
+                .map(t -> t < maxValue)
                 .toList();
     }
 
@@ -77,6 +78,6 @@ public class LogicsImpl implements Logics {
     @Override
     public boolean toQuit() {
         return values.stream()
-                .allMatch(t -> t == MAX_VALUE);
+                .allMatch(t -> t == maxValue);
     }
 }
