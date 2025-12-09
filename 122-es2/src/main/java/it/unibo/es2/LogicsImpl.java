@@ -32,11 +32,10 @@ public class LogicsImpl implements Logics {
     public boolean hit(final int row, final int col) {
         if (this.matrix[row][col]) {
             this.matrix[row][col] = false;
-            return false;
         } else {
             this.matrix[row][col] = true;
-            return true;
         }
+        return this.matrix[row][col];
     }
 
     /**
