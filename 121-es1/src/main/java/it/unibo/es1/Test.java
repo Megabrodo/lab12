@@ -32,7 +32,8 @@ public final class Test {
      * @param args ignored
      */
     public static void main(final String... args) {
-        new GUI(6);
+        final int value = 6;
+        new GUI(value);
     }
 
 }

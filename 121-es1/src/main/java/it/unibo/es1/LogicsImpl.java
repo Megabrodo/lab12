@@ -78,6 +78,6 @@ public class LogicsImpl implements Logics {
     @Override
     public boolean toQuit() {
         return values.stream()
-                .allMatch(t -> t == maxValue);
+                .allMatch(t -> t.equals(values.getFirst()));
     }
 }
