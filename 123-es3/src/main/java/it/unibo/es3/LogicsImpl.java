@@ -46,10 +46,6 @@ public class LogicsImpl implements Logics {
     @Override
     public void replicate() {
         final boolean[][] copy = matrixCopy();
-        for (int i = 0; i < maxValue; i++) {
-            copy[i] = Arrays.copyOf(this.matrix[i], maxValue);
-        }
-
         for (int row = 0; row < maxValue; row++) {
             for (int col = 0; col < maxValue; col++) {
                 if (copy[row][col]) {
